@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+[class*="col-"]{
+  float: left;
+  width: 100%;
+  padding: 5px;
+}
+@include media-query("tablet") {
+  @for $i from 1 through 12{
+    .col-#{$i}{
+      width: 100% / 12 * $i;
+    }
+  }
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}

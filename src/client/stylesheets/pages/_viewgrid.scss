@@ -1,0 +1,72 @@
+.student-card{
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  float: left;
+  background-color: white;
+  margin: 0 auto;
+  border: 1px solid $gray;
+  &-large{
+    cursor: pointer;
+    background-color: white;
+    margin: auto;
+    min-width: 240px;
+    max-width: 260px;
+  }
+  &-body{
+    padding: 5px;
+    font-weight: $bold;
+    text-align: center;
+    position: relative;
+    border: 5px solid white;
+    min-height: 165px;
+    max-height: 180px;
+    min-width: 120px;
+    max-width: 130px;
+    &-large{
+      padding: 5px;
+      font-weight: $bold;
+      text-align: center;
+      position: relative;
+      border: 5px solid white;
+      width: 100%;
+      min-height: 330px;
+      max-height: 360px;
+    }
+    &-name{
+      position: absolute;
+      left:0;
+      top: 40%;
+      right: 0;
+    }
+    &-bottom{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    &-date{
+      position: absolute;
+      top: 5%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: darken($gray, 10%);
+    }
+  }
+}
+
+.location-button{
+  cursor: pointer;
+  font-weight: $bold;
+  color: white;
+  width: 100%;
+  padding: 14px 16px;
+  text-align: center;
+  border: 1px solid $gray;
+}
+
+#view-grid{
+  width: 100%;
+  overflow-x: hidden;
+}

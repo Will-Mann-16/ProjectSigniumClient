@@ -1,0 +1,31 @@
+*{
+  font-family: sans-serif;
+  font-weight: $regular;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+h1{
+  font-size: 2 * 16px;
+  font-weight: $bold;
+}
+h2{
+  font-size: 1.5 * 16px;
+  font-weight: $bold;
+}
+h3{
+  font-size: 1.17 * 16px;
+  font-weight: $bold;
+}
+h4{
+  font-size: 16px;
+  font-weight: $bold;
+}
+h5{
+    font-size: 0.83 * 16px;
+    font-weight: $bold;
+}
+h6{
+  font-size: 0.67 * 16px;
+  font-weight: $bold;
+}
