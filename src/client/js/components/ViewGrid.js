@@ -8,6 +8,12 @@ import StudentCard from './StudentCard';
 import LocationButton from "./LocationButton";
 
 class ViewGrid extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedDropped: false
+    }
+  }
   addSelected(id){
     var selectedIDs = this.props.students.selected;
     var index = selectedIDs.indexOf(id);
@@ -16,6 +22,22 @@ class ViewGrid extends React.Component{
     }else{
       this.props.dispatch(selectStudent(id));
     }
+  }
+  selectYear(id){
+    this.props.students.students.forEach((student) => {
+      if(student.yeargroup.toLowerCase() === id.toLowerCase()){
+        this.addSelected(student._id);
+      }
+    });
+  }
+  deselectAll(){
+      var selectedIDs = this.props.students.selected;
+      selectedIDs.forEach((id) => {
+        this.addSelected(id);
+      });
+  }
+  toggleDropped(){
+    this.setState({...this.state, selectedDropped: !this.state.selectedDropped});
   }
   updateLocation(buttonID){
     var selectedIDs = this.props.students.selected;
@@ -70,6 +92,17 @@ class ViewGrid extends React.Component{
         {studentHTML}
       </div>
       <div class="col-2">
+        <div class="accordian location-button" onClick={this.toggleDropped.bind(this)}>
+          <div class="location-button-body">Select</div>
+        </div>
+        <div class="panel" style={{maxHeight: this.state.selectedDropped ? "none": 0}}>
+          <button class="select-button" onClick={this.deselectAll.bind(this)}>Deselect All</button>
+          <button class="select-button" onClick={this.selectYear.bind(this, "3RD")}>Third Form</button>
+          <button class="select-button" onClick={this.selectYear.bind(this, "4TH")}>Forth Form</button>
+          <button class="select-button" onClick={this.selectYear.bind(this, "5TH")}>Fifth Form</button>
+          <button class="select-button" onClick={this.selectYear.bind(this, "L6TH")}>Lower Sixth</button>
+          <button class="select-button" onClick={this.selectYear.bind(this, "U6TH")}>Upper Sixth</button>
+        </div>
         {noHeadingHTML}
         {inCollegeHTML}
         {outOfCollegeHTML }
