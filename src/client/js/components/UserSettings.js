@@ -18,7 +18,7 @@ class UserSettings extends React.PureComponent{
       this.setState({...this.state, user: this.props.user.user.data});
     }
     else{
-      this.setState({...this.state, user: {role: this.props.user.user.data.role, _house: this.props.user.user.data.house}});
+      this.setState({...this.state, user: {role: this.props.user.user.data.role, house: this.props.user.user.data.house}});
     }
   }
   handleChange(event){
@@ -28,7 +28,7 @@ class UserSettings extends React.PureComponent{
   }
   handleHouseChange(event){
     const value = event.target.value;
-    this.setState({...this.state, user: {...this.state.user, _house: value}});
+    this.setState({...this.state, user: {...this.state.user, house: value}});
   }
   handleRoleChange(event){
     const value = event.target.value;

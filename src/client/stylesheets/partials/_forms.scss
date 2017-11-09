@@ -1,8 +1,12 @@
-.form-input{
-  width: 100%;
+.input{
   padding: 12px;
   border: 1px solid $black-onyx;
   border-radius: 4px;
   margin-top: 6px;
   margin-bottom: 16px;
+}
+
+.form-input{
+  @extend .input;
+  width: 100%;
 }

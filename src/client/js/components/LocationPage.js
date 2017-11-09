@@ -44,7 +44,7 @@ class LocationPage extends React.Component{
     this.setState({...this.state, submitted: true});
   }
   disableRole(role){
-    if(role >= this.props.user.user.data.role){
+    if(role <= this.props.user.user.data.role){
       return true;
     }
     return false;
@@ -71,10 +71,11 @@ class LocationPage extends React.Component{
       });
       return(
         <div class="container row">
+          <h3>Edit Location</h3>
           <div class="col-6">
             <input required class="form-input" onChange={this.handleChange.bind(this)} name="name" value={this.state.location.name} placeholder="Name"/>
             <CirclePicker color={this.state.location.colour} onChangeComplete={this.handleChangeColour.bind(this)}/>
-            <SliderPicker color={this.state.location.colour} onChangeComplete={this.handleChangeColour.bind(this)}/>
+            <SliderPicker style={{marginTop: 5}} color={this.state.location.colour} onChangeComplete={this.handleChangeColour.bind(this)}/>
             <select required class="form-input" name="heading" onChange={this.handleChange.bind(this)}>
               <option value="0">No Heading</option>
               <option value="1">In College</option>

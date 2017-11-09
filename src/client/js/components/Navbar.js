@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {NavLink, withRouter} from "react-router-dom";
 
-export default class Navbar extends React.Component{
+class Navbar extends React.Component{
   render(){
     return(
       <nav class="main-topnav">
@@ -12,7 +12,14 @@ export default class Navbar extends React.Component{
         <NavLink to="/locations">Locations</NavLink>
         <NavLink to="/history">History</NavLink>
         <NavLink to="/settings">Settings</NavLink>
+          {this.props.user.user.data.role == 0 ? <NavLink to="/houses">Houses</NavLink> : null}
       </nav>
     );
   }
 }
+
+function mapStateToProps(state){
+    return{ user: state.user}
+}
+
+export default connect(mapStateToProps)(Navbar);

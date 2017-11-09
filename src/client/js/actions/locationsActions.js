@@ -7,6 +7,7 @@ export function createLocation(location){
     dispatch({type: "CREATE_LOCATION"});
     axios.post(scriptsDirectory + "locations/create", {params: { location: location }}).then((response) =>{
       if(response.data.success){
+        dispatch(readLocations(location._house));
         emit("socket-client-server-redraw-major");
         dispatch({type: "CREATE_LOCATION_FULFILLED", payload: response.data.success});
       }
@@ -40,7 +41,8 @@ export function updateLocation(id, location){
     dispatch({type: "UPDATE_LOCATION"});
     axios.post(scriptsDirectory + "locations/update",  {params: { id: id, location: location }}).then((response) =>{
       if(response.data.success){
-        emit("socket-client-server-redraw-major");
+          dispatch(readLocations(location._house));
+          emit("socket-client-server-redraw-major");
         dispatch({type: "UPDATE_LOCATION_FULFILLED", payload: response.data.location});
       }
       else{
@@ -57,7 +59,7 @@ export function deleteLocation(id){
     dispatch({type: "DELETE_LOCATION"});
     axios.get(scriptsDirectory + "locations/delete",  {params: { id: id }}).then((response) =>{
       if(response.data.success){
-        emit("socket-client-server-redraw-major");
+          emit("socket-client-server-redraw-major");
         dispatch({type: "DELETE_LOCATION_FULFILLED", payload: response.data.success});
       }
       else{

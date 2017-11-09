@@ -51,6 +51,9 @@ export default function reducer(state={
       return {...state, fetching: false, user: {}, authenticated: false};
     case "LOGON_USER_REJECTED":
       return {...state, fetching: false, error: action.payload};
+
+      case "CHANGE_HOUSE_USER":
+        return {...state, user: {...state.user, data: {...state.user.data, house: action.payload}}};
     default:
       return state;
   }

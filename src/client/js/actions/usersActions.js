@@ -43,6 +43,7 @@ export function updateUser(id, user){
     axios.post(scriptsDirectory + "users/update", {params: { id: id, user: user }}).then((response) =>{
       if(response.data.success){
         localStorage.setItem("AUTH-TOKEN", response.data.token);
+        dispatch(readUser());
         dispatch({type: "UPDATE_USER_FULFILLED", payload: true});
       }
       else{
@@ -104,3 +105,11 @@ export function logoutUser(){
       //dispatch({type: "LOGOUT_USER_REJECTED", payload: err});
   };
 }
+
+export function changeUserHouse(house){
+  return {
+    type: "CHANGE_HOUSE_USER",
+      payload: house
+  }
+}
+
