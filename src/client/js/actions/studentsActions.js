@@ -17,6 +17,7 @@ export function createStudent(student){
     dispatch({type: "CREATE_STUDENT"});
     axios.post(scriptsDirectory + "students/create", {params: { student: student }}).then((response) =>{
       if(response.data.success){
+        dispatch(readStudentsMajor(student._house));
         emit("socket-client-server-redraw-major");
         dispatch({type: "CREATE_STUDENT_FULFILLED", payload: true});
       }
@@ -31,7 +32,11 @@ export function createStudent(student){
 export function readStudentsMajor(house){
   return dispatch => {
     dispatch({type: "READ_STUDENTS_MAJOR"});
-    axios.get(scriptsDirectory + "students/read", {params: { house: house }}).then((response) =>{
+    axios.get(scriptsDirectory + "students/read", {params: { house: house }} /*, {
+      onDownloadProgress: progressEvent => {
+        let percentCompleted = Math.floor((progressEvent.loaded * 100) / progressEvent.total);
+
+    }}*/).then((response) =>{
       dispatch({type: "READ_STUDENTS_MAJOR_FULFILLED", payload: response.data.students});
     }).catch((err) =>{
       dispatch({type: "READ_STUDENTS_MAJOR_REJECTED", payload: err});
@@ -78,7 +83,8 @@ export function updateStudent(id, student){
     dispatch({type: "UPDATE_STUDENT"});
     axios.post(scriptsDirectory + "students/update",  {params: { id: id, student: student }}).then((response) =>{
       if(response.data.success){
-        emit("socket-client-server-redraw-major");
+          dispatch(readStudentsMajor(student._house));
+          emit("socket-client-server-redraw-major");
         dispatch({type: "UPDATE_STUDENT_FULFILLED", payload: response.data.student});
       }
       else{
@@ -112,7 +118,8 @@ export function uploadStudents(json,house){
     dispatch({type: "UPLOAD_STUDENTS"});
     axios.post(scriptsDirectory + "students/upload", {params: { json: json , house: house}}).then((response) =>{
       if(response.data.success){
-        emit("socket-client-server-redraw-major");
+          dispatch(readStudentsMajor(house));
+          emit("socket-client-server-redraw-major");
         dispatch({type: "UPLOAD_STUDENTS_FULFILLED", payload: response.data.success});
       }
       else{

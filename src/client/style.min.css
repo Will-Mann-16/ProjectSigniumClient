@@ -164,6 +164,7 @@ h6 {
     font-weight: 600; }
   .table td, .table th {
     padding: 12px;
+    vertical-align: middle;
     text-align: left;
     border-bottom: 1px solid #cecece; }
   .table-striped tr:nth-child(even) {
@@ -238,6 +239,23 @@ body {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+.accordian {
+  background-color: #f5f5f5;
+  transition: 0.4s;
+  color: black !important; }
+
+.select-button {
+  margin: 2px 0;
+  background-color: #f5f5f5;
+  border: none;
+  width: 100%;
+  padding: 5px 0; }
+
+.panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out; }
+
 * {
   box-sizing: border-box; }
 
@@ -317,13 +335,15 @@ body {
     .icon-bar a:hover {
       background-color: #4d4d4d; }
 
-.form-input {
-  width: 100%;
+.input, .form-input {
   padding: 12px;
   border: 1px solid #2D2926;
   border-radius: 4px;
   margin-top: 6px;
   margin-bottom: 16px; }
+
+.form-input {
+  width: 100%; }
 
 .student-card {
   cursor: pointer;

@@ -94,6 +94,7 @@ class StudentPage extends React.Component{
     });
       return(
         <div class="container row">
+          <h3>Edit Student</h3>
           <div class="col-6">
           <div class="student-card-large">
             <div class="student-card-body-large" style={{borderColor: this.state.student.location ? this.state.student.location.colour : "white"}}>

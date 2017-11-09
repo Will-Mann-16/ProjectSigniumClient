@@ -7,6 +7,7 @@ export function createHouse(house){
     dispatch({type: "CREATE_HOUSE"});
     axios.post(scriptsDirectory + "houses/create", {params: { house: house }}).then((response) =>{
       if(response.data.success){
+        dispatch(readHouses());
         dispatch({type: "CREATE_HOUSE_FULFILLED", payload: response.data.success});
       }
       else{
@@ -39,7 +40,8 @@ export function updateHouse(id, house){
     dispatch({type: "UPDATE_HOUSE"});
     axios.post(scriptsDirectory + "houses/update",  {params: { id: id, house: house }}).then((response) =>{
       if(response.data.success){
-        dispatch({type: "UPDATE_HOUSE_FULFILLED", payload: response.data.house});
+          dispatch(readHouses());
+          dispatch({type: "UPDATE_HOUSE_FULFILLED", payload: response.data.house});
       }
       else{
         dispatch({type: "UPDATE_HOUSE_REJECTED", payload: response.data.reason});
@@ -55,7 +57,8 @@ export function deleteHouse(id){
     dispatch({type: "DELETE_HOUSE"});
     axios.get(scriptsDirectory + "houses/delete",  {params: { id: id }}).then((response) =>{
       if(response.data.success){
-        dispatch({type: "DELETE_HOUSE_FULFILLED", payload: response.data.success});
+          dispatch(readHouses());
+          dispatch({type: "DELETE_HOUSE_FULFILLED", payload: response.data.success});
       }
       else{
         dispatch({type: "DELETE_HOUSE_REJECTED", payload: response.data.reason});
