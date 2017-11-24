@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import UserSettings from "./UserSettings"
+import ConfigSettings from "./ConfigSettings"
 
 class SettingsPage extends React.Component{
   constructor(props){
@@ -35,6 +36,12 @@ class SettingsPage extends React.Component{
             <UserSettings key="new"/>
           </div>
         );
+        case 2:
+            return(
+                <div class="col-10">
+                    <ConfigSettings />
+                </div>
+            );
     }
   }
 
@@ -44,7 +51,8 @@ class SettingsPage extends React.Component{
         <div class="col-2">
           <ul class="list">
             <li onClick={this.changeActivePage.bind(this, 0)} class={this.state.activePage == 0 ? "active" : null}>User Settings</li>
-            <li onClick={this.changeActivePage.bind(this, 1)} class={this.state.activePage == 0 ? "active" : null}>New User</li>
+            <li onClick={this.changeActivePage.bind(this, 1)} class={this.state.activePage == 1 ? "active" : null}>New User</li>
+              {this.props.user.user.data.role <= 2 ? <li onClick={this.changeActivePage.bind(this, 2)} class={this.state.activePage == 2 ? "active": null}>Options</li> : null}
           </ul>
         </div>
         {this.renderCurrentPage()}

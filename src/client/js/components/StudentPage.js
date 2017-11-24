@@ -85,7 +85,6 @@ class StudentPage extends React.Component{
       return(<Redirect to="/students"/>);
     }
     var date = new Date(this.state.student.timelastout);
-    console.log(this.props);
     var locationHTML = this.props.locations.locations.map((location, key) => {
         return(<option key={key} value={location._id} selected={this.props.edit && location._id === this.state.student.location.id} style={{backgroundColor: location.colour}}>{location.name}</option>);
     });

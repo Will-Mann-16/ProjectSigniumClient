@@ -11,6 +11,7 @@ import LocationPage from './LocationPage';
 import SettingsPage from './SettingsPage';
 import HistoryListPage from './HistoryListPage';
 import HousePage from './HousePage';
+import CalloverPage from "./CalloverPage"
 
 import history from "../history";
 import Navbar from "./Navbar";
@@ -33,6 +34,7 @@ class MainSectionLayout extends React.Component {
             <Route path="/locations/new" name="newlocation" component={({props}) => (<LocationPage {...props}/>)}></Route>
             <Route path="/history" name="history" component={({props}) => (<HistoryListPage {...props}/>)}></Route>
             <Route path="/locations/:location" name="location" component={({props, match}) => (<LocationPage edit locationID={match.params.location} {...props}/>)}></Route>
+            <Route path="/callover" name="callover" component={({props}) => (<CalloverPage {...props} />)}></Route>
             <Route path="/settings" name="settings" component={({props}) => (<SettingsPage {...props}/>)}></Route>
           </Switch>
         </div>

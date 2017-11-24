@@ -44,8 +44,15 @@
     font-size: 18px;
     color: black;
     display: block;
-    :hover{
+    &:hover{
       background-color: #eee;
+    }
+  }
+  .active{
+    background-color: $black-onyx;
+    color: white;
+    &:hover{
+      background-color: lighten($black-onyx, 10%);
     }
   }
 }

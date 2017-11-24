@@ -11,6 +11,7 @@ class Navbar extends React.Component{
         <NavLink to="/students">Students</NavLink>
         <NavLink to="/locations">Locations</NavLink>
         <NavLink to="/history">History</NavLink>
+          <NavLink to="/callover">Callover</NavLink>
         <NavLink to="/settings">Settings</NavLink>
           {this.props.user.user.data.role == 0 ? <NavLink to="/houses">Houses</NavLink> : null}
       </nav>

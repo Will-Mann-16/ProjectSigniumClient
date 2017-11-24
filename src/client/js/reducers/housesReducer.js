@@ -34,6 +34,13 @@ export default function reducer(state={
     case "DELETE_HOUSE_FULFILLED":
       return {...state, fetching: false, fetched: true};
 
+      case "MODIFY_CONFIG_HOUSE":
+        return {...state, fetching: true, fetched: true};
+      case "MODIFY_CONFIG_HOUSE_REJECTED":
+        return {...state, fetching: false, error: action.payload};
+      case "MODIFY_CONFIG_HOUSE_FULFILLED":
+        return {...state, fetching: false, fetched: true};
+
     default:
       return state;
   }

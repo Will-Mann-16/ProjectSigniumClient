@@ -68,3 +68,20 @@ export function deleteHouse(id){
     });
   };
 }
+
+export function modifyHouseConfig(house, config){
+  return dispatch => {
+    dispatch({type: "MODIFY_CONFIG_HOUSE"});
+    axios.post(scriptsDirectory + "houses/update-config", {params: {house: house, config: config}}).then((response) => {
+      if(response.data.success){
+          dispatch(readHouses());
+          dispatch({type: "MODIFY_CONFIG_HOUSE_FULFILLED", payload: response.data.house});
+      }
+      else{
+        dispatch({type: "MODIFY_CONFIG_HOUSE_REJECTED", payload: response.data.reason});
+      }
+    }).catch((err) => {
+      dispatch({type: "MODIFY_CONFIG_HOUSE_REJECTED", payload: err});
+    });
+  }
+}

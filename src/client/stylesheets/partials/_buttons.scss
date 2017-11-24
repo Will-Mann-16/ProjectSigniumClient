@@ -29,6 +29,10 @@
       &:hover{
         background-color: darken($colour, 10%);
       }
+      &:disabled{
+        cursor: not-allowed;
+        background-color: lighten($colour, 15%);
+      }
     }
   }
 }

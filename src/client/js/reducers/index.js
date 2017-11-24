@@ -4,11 +4,12 @@ import students from "./studentsReducer";
 import locations from "./locationsReducer";
 import user from "./usersReducer";
 import houses from "./housesReducer";
-import {routerReducer} from "react-router-redux";
+import callover from "./calloverReducer";
 
 export default combineReducers({
   user,
   students,
   locations,
-  houses
+  houses,
+    callover
 });

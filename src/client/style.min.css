@@ -99,38 +99,65 @@ h6 {
   background-color: #4CAF50; }
   .btn-green:hover {
     background-color: #3d8b40; }
+  .btn-green:disabled {
+    cursor: not-allowed;
+    background-color: #80c883; }
 .btn-blue {
   background-color: #2196F3; }
   .btn-blue:hover {
     background-color: #0c7cd5; }
+  .btn-blue:disabled {
+    cursor: not-allowed;
+    background-color: #6ab8f7; }
 .btn-orange {
   background-color: #FF9800; }
   .btn-orange:hover {
     background-color: #cc7a00; }
+  .btn-orange:disabled {
+    cursor: not-allowed;
+    background-color: #ffb74d; }
 .btn-red {
   background-color: #F44336; }
   .btn-red:hover {
     background-color: #ea1c0d; }
+  .btn-red:disabled {
+    cursor: not-allowed;
+    background-color: #f8877f; }
 .btn-gray {
   background-color: #E7E7E7; }
   .btn-gray:hover {
     background-color: #cecece; }
+  .btn-gray:disabled {
+    cursor: not-allowed;
+    background-color: white; }
 .btn-african-sapphire {
   background-color: #271747; }
   .btn-african-sapphire:hover {
     background-color: #120b20; }
+  .btn-african-sapphire:disabled {
+    cursor: not-allowed;
+    background-color: #472a81; }
 .btn-serpentine {
   background-color: #173F35; }
   .btn-serpentine:hover {
     background-color: #091a16; }
+  .btn-serpentine:disabled {
+    cursor: not-allowed;
+    background-color: #2b7764; }
 .btn-apple-jade {
   background-color: #008755; }
   .btn-apple-jade:hover {
     background-color: #005435; }
+  .btn-apple-jade:disabled {
+    cursor: not-allowed;
+    background-color: #00d485; }
 .btn-black-onyx {
   background-color: #2D2926; }
   .btn-black-onyx:hover {
     background-color: #11100f; }
+  .btn-black-onyx:disabled {
+    cursor: not-allowed;
+    background-color: #564f49; }
 
 .btn-group > * {
   float: left;
@@ -188,8 +215,13 @@ h6 {
     font-size: 18px;
     color: black;
     display: block; }
-    .list li :hover {
+    .list li:hover {
       background-color: #eee; }
+  .list .active {
+    background-color: #2D2926;
+    color: white; }
+    .list .active:hover {
+      background-color: #49423d; }
 
 body {
   background-color: #ededed; }
@@ -204,8 +236,8 @@ body {
   padding: 50px; }
   .modal .modal-body {
     background-color: white;
-    max-width: 500;
-    min-width: 300;
+    max-width: 500px;
+    min-width: 300px;
     margin: 0 auto;
     padding: 30px; }
 
