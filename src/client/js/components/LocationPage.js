@@ -39,7 +39,7 @@ class LocationPage extends React.Component{
     if(this.props.edit){
       this.props.dispatch(updateLocation(this.state.location._id, this.state.location));
     }else{
-      this.props.dispatch(createLocation(this.state.location));
+      this.props.dispatch(createLocation({...this.state.location, order: this.props.locations.locations.length + 1}));
     }
     this.setState({...this.state, submitted: true});
   }
