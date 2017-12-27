@@ -22,6 +22,7 @@
     "react": "^15.6.1",
     "react-color": "^2.13.5",
     "react-dom": "^15.6.1",
+    "react-powerplug": "^0.1.2",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",

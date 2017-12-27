@@ -1,7 +1,10 @@
 /*jshint esversion: 6 */
 import axios from "axios";
-import { scriptsDirectory } from "./../socket.js";
+import { scriptsDirectory, disconnect } from "./../socket.js";
 import { push } from "react-router-redux";
+import {activateListener} from "../socket";
+import {readStudentsMajor} from "./studentsActions";
+import {readLocations} from "./locationsActions";
 
 
 export function createUser(user){
@@ -107,9 +110,12 @@ export function logoutUser(){
 }
 
 export function changeUserHouse(house){
-  return {
-    type: "CHANGE_HOUSE_USER",
-      payload: house
+  return dispatch => {
+    disconnect();
+    activateListener(house);
+    dispatch(readStudentsMajor(house));
+    dispatch(readLocations(house));
+    dispatch({type: "CHANGE_HOUSE_USER", payload: house});
   }
 }
 

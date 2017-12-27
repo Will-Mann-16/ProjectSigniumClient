@@ -21,7 +21,6 @@ export function activateListener(dispatch, house) {
       });
       socket.on('socket-server-client-init', function () {
         socket.on('socket-server-client-redraw-minor', response => {
-          console.log(response);
           if (house === response.house) {
             dispatch(studentsActions.readStudentsMinor(house));
           }
@@ -40,5 +39,11 @@ export function activateListener(dispatch, house) {
 export function emit(value, packet = {}) {
   if (connected) {
     socket.emit(value, packet);
+  }
+}
+
+export function disconnect(){
+  if(connected){
+    socket.disconnect();
   }
 }
