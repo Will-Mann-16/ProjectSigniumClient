@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {Toggle} from "react-powerplug"
 import { house } from '../socket';
 import {selectStudent, deselectStudent, updateStudentLocation} from '../actions/studentsActions';
 
@@ -47,12 +47,7 @@ class ViewGrid extends React.Component{
     var studentHTML = null;
     var locationHTML = null;
     studentHTML = this.props.students.students.map((student, key) => {
-      if(this.props.students.selected.indexOf(student._id) != -1){
-        return(<StudentCard selected view={this.props.view} student={student} key={key} addSelected={this.addSelected.bind(this)}/> );
-      }
-      else{
-        return(<StudentCard view={this.props.view} student={student} key={key} addSelected={this.addSelected.bind(this)}/> );
-      }
+        return(<StudentCard selected={this.props.students.selected.indexOf(student._id) != -1} view={this.props.view} student={student} key={key} addSelected={this.addSelected.bind(this)}/> );
     });
       var noHeading = [], inCollege = [], outOfCollege = [];
       this.props.locations.locations.map((location, key) =>{
@@ -69,22 +64,13 @@ class ViewGrid extends React.Component{
         }
       });
     var noHeadingHTML = noHeading.map((location, key) => {
-        if (key == 0) {
-          return (<LocationButton break location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
-        }
-        return (<LocationButton location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
+        return (<LocationButton location={location} break={key == 0} key={key} updateLocation={this.updateLocation.bind(this)}/>);
     });
     var inCollegeHTML = inCollege.map((location, key) => {
-        if (key == 0) {
-          return (<LocationButton break location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
-        }
-        return (<LocationButton location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
+        return (<LocationButton break={key == 0} location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
     });
     var outOfCollegeHTML = outOfCollege.map((location, key) => {
-        if (key == 0) {
-          return (<LocationButton break location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
-        }
-        return (<LocationButton location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
+          return (<LocationButton break={key == 0} location={location} key={key} updateLocation={this.updateLocation.bind(this)}/>);
     });
     return(
       <div id="view-grid" class="row" style={{marginTop: this.props.view ? 0 : 50}}>
@@ -92,17 +78,18 @@ class ViewGrid extends React.Component{
         {studentHTML}
       </div>
       <div class="col-2">
-        <div class="accordian location-button" onClick={this.toggleDropped.bind(this)}>
-          <div class="location-button-body">Select</div>
-        </div>
-        <div class="panel" style={{maxHeight: this.state.selectedDropped ? "none": 0}}>
-          <button class="select-button" onClick={this.deselectAll.bind(this)}>Deselect All</button>
-          <button class="select-button" onClick={this.selectYear.bind(this, "3RD")}>Third Form</button>
-          <button class="select-button" onClick={this.selectYear.bind(this, "4TH")}>Forth Form</button>
-          <button class="select-button" onClick={this.selectYear.bind(this, "5TH")}>Fifth Form</button>
-          <button class="select-button" onClick={this.selectYear.bind(this, "L6TH")}>Lower Sixth</button>
-          <button class="select-button" onClick={this.selectYear.bind(this, "U6TH")}>Upper Sixth</button>
-        </div>
+        <Toggle initial={false}>
+            {({on, toggle}) => {return (<div><div class="accordian location-button" onClick={toggle}>
+              <div class="location-button-body">Select</div>
+            </div>{on && <div class="panel">
+              <button class="select-button" onClick={this.deselectAll.bind(this)}>Deselect All</button>
+              <button class="select-button" onClick={this.selectYear.bind(this, "3RD")}>Third Form</button>
+              <button class="select-button" onClick={this.selectYear.bind(this, "4TH")}>Forth Form</button>
+              <button class="select-button" onClick={this.selectYear.bind(this, "5TH")}>Fifth Form</button>
+              <button class="select-button" onClick={this.selectYear.bind(this, "L6TH")}>Lower Sixth</button>
+              <button class="select-button" onClick={this.selectYear.bind(this, "U6TH")}>Upper Sixth</button>
+                </div>}</div>)}}
+        </Toggle>
         {noHeadingHTML}
         {inCollegeHTML}
         {outOfCollegeHTML }

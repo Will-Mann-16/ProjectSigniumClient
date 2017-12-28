@@ -1,10 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import { Toggle } from "react-powerplug"
 import { changeUserHouse } from "../actions/usersActions";
-import { readStudentsMajor } from "../actions/studentsActions";
-import { readLocations } from "../actions/locationsActions";
-import { readHouses, deleteHouse } from "../actions/housesActions";
+import { deleteHouse } from "../actions/housesActions";
 
 class HousesListPage extends React.Component{
     constructor(props){
@@ -33,8 +32,6 @@ class HousesListPage extends React.Component{
     }
     changeHouse(house){
         this.props.dispatch(changeUserHouse(house));
-        this.props.dispatch(readStudentsMajor(house));
-        this.props.dispatch(readLocations(house));
     }
     render(){
         const houseHTML = this.props.houses.houses.map((house, key) => {
@@ -44,21 +41,22 @@ class HousesListPage extends React.Component{
             const colours = house.colours.map((colour, key) => {
                 return(<div key={key} style={{backgroundColor: colour, padding: 15, display: "inline", border: "3px #555 solid", height: "100%", margin: 0}}></div>)
             });
-            var deleteHTML = this.state.deleted.indexOf(house._id) != -1 ? (
-                <div class="btn-group" style={{position: "absolute", top: 0, bottom: 0, right: 0, left: 0}}>
-                    <button class="btn-green btn-icon-small" style={{width: "50%", height: "100%"}} onClick={this.delete.bind(this, house._id)}><i class="fa fa-trash"></i></button>
-                    <button class="btn-red btn-icon-small" style={{width: "50%", height: "100%"}} onClick={this.removeDelete.bind(this, house._id)}><i class="fa fa-times"></i></button>
-                </div>
-            ) : (
-                <i class="fa fa-trash" onClick={this.promptDelete.bind(this, house._id)}></i>
-            );
             var link = "/houses/" + house._id;
             return(<tr key={key}>
                 <td>{house.name}</td>
                 <td>{personell}</td>
                 <td style={{textAlign: "center"}}>{colours}</td>
                 <td style={{textAlign: 'center'}}><Link to={link} style={{textDecoration: "none", color: "black"}}><i class="fa fa-edit"></i></Link></td>
-                <td style={{textAlign: 'center', height: "100%", position: "relative"}}>{deleteHTML}</td>
+                <td style={{textAlign: 'center', height: "100%", position: "relative"}}>
+                    <Toggle initial={false}>
+                        {({on, toggle}) => on ? <div class="btn-group" style={{position: "absolute", top: 0, bottom: 0, right: 0, left: 0}}>
+                                <button class="btn-green btn-icon-small" style={{width: "50%", height: "100%"}} onClick={this.delete.bind(this, house._id)}><i class="fa fa-trash"></i></button>
+                                <button class="btn-red btn-icon-small" style={{width: "50%", height: "100%"}} onClick={toggle}><i class="fa fa-times"></i></button>
+                            </div> :
+                            <i class="fa fa-trash" onClick={toggle}></i>}
+
+                            </Toggle>
+                </td>
                 <td style={{textAlign: 'center', height: "100%"}}>{this.props.user.user.data.house === house._id ? <button class="btn-gray" onClick={null}>Selected</button> : <button class="btn-blue" onClick={this.changeHouse.bind(this, house._id)}>Select</button>}</td>
             </tr>);
         });

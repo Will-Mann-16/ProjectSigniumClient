@@ -77,7 +77,7 @@ class LocationPage extends React.Component{
             <CirclePicker color={this.state.location.colour} onChangeComplete={this.handleChangeColour.bind(this)}/>
             <SliderPicker style={{marginTop: 5}} color={this.state.location.colour} onChangeComplete={this.handleChangeColour.bind(this)}/>
             <select required class="form-input" name="heading" onChange={this.handleChange.bind(this)}>
-              <option value="0">No Heading</option>
+              <option value="0" selected>No Heading</option>
               <option value="1">In College</option>
               <option value="2">Out of College</option>
             </select>
